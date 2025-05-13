@@ -3,7 +3,7 @@ name: Resize Images
 on:
   push:
     paths:
-      - 'images/**'
+      - 'flier/**'
 
 jobs:
   resize:
