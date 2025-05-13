@@ -1,18 +1,20 @@
-name: Resize Images
+name: Resize Images on Commit
 
 on:
   push:
+    branches:
+      - main                   # デフォルトブランチ名を指定
     paths:
-      - 'flier/**'
+      - 'flier/**'            # 対象フォルダのパスフィルタ
 
 jobs:
   resize:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3  # リポジトリ内容を取得
       - name: Resize to 1444px width
         uses: sharadcodes/img-resizer@v1.1
         with:
           image-folder: 'flier'
-          new-resolution: '1444x'
-          output-folder: 'flier'
+          new-resolution: '1444x'   # 幅800px、高さは自動調整
+          output-folder: 'resized' # 出力先フォルダ
