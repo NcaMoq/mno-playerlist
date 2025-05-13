@@ -13,6 +13,6 @@ jobs:
       - name: Resize to 800px width
         uses: sharadcodes/img-resizer@v1.1
         with:
-          image-folder: 'images'
+          image-folder: 'flier'
           new-resolution: '1444x'
           output-folder: 'resized'
