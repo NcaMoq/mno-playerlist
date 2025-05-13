@@ -16,5 +16,5 @@ jobs:
         uses: sharadcodes/img-resizer@v1.1
         with:
           image-folder: 'flier'
-          new-resolution: '1444x'   # 幅800px、高さは自動調整
+          new-resolution: '1444x2048'   # 幅800px、高さは自動調整
           output-folder: 'resized' # 出力先フォルダ
