@@ -1,20 +1,42 @@
 name: Resize Images on Commit
 
+# -----------------------------------------
+# A. ブランチ＆パスフィルタ設定
 on:
   push:
-    branches:
-      - main                   # デフォルトブランチ名を指定
+    branches: [ main ]       # 'main' へのプッシュをトリガー
     paths:
-      - 'flier/**'            # 対象フォルダのパスフィルタ
+      - 'flier/**'           # flier/ 配下の変更のみ検知
+
+# B. Token 書き込み権限付与
+permissions:
+  contents: write
 
 jobs:
   resize:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3  # リポジトリ内容を取得
-      - name: Resize to 1444px width
+      # 1. リポジトリをチェックアウト
+      - uses: actions/checkout@v3
+
+      # 2. 出力フォルダの作成
+      - name: Prepare output folder
+        run: mkdir -p resized
+
+      # 3. 画像リサイズ実行
+      - name: Resize to 1444×2048
         uses: sharadcodes/img-resizer@v1.1
         with:
           image-folder: 'flier'
-          new-resolution: '1444x2048'   # 幅800px、高さは自動調整
-          output-folder: 'resized' # 出力先フォルダ
+          new-resolution: '1444x2048'
+          output-folder: 'resized'
+
+      # 4. コミット＆プッシュ
+      - name: Commit resized images
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'resized/**'
+          author_name: 'github-actions[bot]'
+          author_email: 'github-actions[bot]@users.noreply.github.com'
+          message: 'chore: add resized images'
