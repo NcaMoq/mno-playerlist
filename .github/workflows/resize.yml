@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Resize to 800px width
+      - name: Resize to 1444px width
         uses: sharadcodes/img-resizer@v1.1
         with:
           image-folder: 'flier'
           new-resolution: '1444x'
-          output-folder: 'resized'
+          output-folder: 'flier'
